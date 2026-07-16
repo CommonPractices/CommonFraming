@@ -66,3 +66,24 @@ what changed in the spec.)*
 
 - **2026-07-15** — Blueprint drafted and extracted from LiteController's design. No running build yet;
   all claims at their initial provenance above. First proof target: the BT light meter (V-1).
+
+- **2026-07-15 — Conformance audit: LiteController spec ⟷ blueprint.** The LiteController spec
+  (v0.1.0, written *before* the blueprint) was audited against the blueprint. **Result: the blueprint
+  HELD — every divergence was additive or clarifying; no contract had to bend, and no prior
+  LiteController decision was reversed.** This is the blueprint's first (design-level) validation, and
+  it is meaningful: an abstraction extracted from an instance that then *fits that instance back
+  cleanly* is at least self-consistent. Divergences found (all reconciled into LiteController's
+  changeset, D-021…D-025):
+  - The spec **hardcoded WebSocket as the interface**; the blueprint's **pluggable northbound**
+    generalized it (WS = one adapter). → spec now conforms; V1 still ships WS only.
+  - The spec **only implied core-mediation**; the blueprint made it a **stated invariant**. → the
+    spec was *underspecified*, not wrong — the blueprint surfaced a load-bearing rule the spec needed.
+  - The spec treated **transport and driver as peer "traits"**; the blueprint sharpened
+    **transport = module, driver = not-a-module + declares its transport**. → clarification.
+  - The spec described the southbound seam **behaviourally**; the blueprint gave it an **async
+    contract**. → the blueprint was *more specified*.
+  - **What this does NOT prove:** the litmus test (V-1) is still open — LiteController is
+    **write-oriented**, so the audit did *not* exercise `confirmed`/readback or transport-agnosticism
+    across a read device. The audit shows the blueprint is self-consistent with its source; the
+    **light meter** is still what proves it generalizes. Two same-shaped write-devices is not yet "two
+    is a pattern" across the read/write axis. Status of the read-side claims remains `[A]`.
