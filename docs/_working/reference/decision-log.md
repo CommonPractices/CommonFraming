@@ -56,6 +56,22 @@ blueprints. Per decision-doctrine §8: status + why + provenance; per §10, noth
   (design); the same-confidence-enum-spans-read-and-write claim is the key `[A]` litmus test, unproven
   until the light meter (commentary V-1).
 
+### D-005 — Design-rationale doc placed in the approved tree (owner-directed)
+- **Status:** accepted
+- **Date:** 2026-07-15
+- **What:** `docs/reference/generalization-rationale.md` — the narrative record of the
+  "generalize this whole effort" design (forks, corrections, the *why* behind each
+  decision). Written **directly into the approved tree** (`docs/reference/`, not
+  `_working/`) by explicit owner direction. It is a rationale record, not a spec — it
+  explains the contracts, does not define them; complements the spec (*what*) and the
+  decision log (terse *what+status*).
+- **Why:** Owner instruction ("write a durable doc in `docs/reference/`"). Owner
+  placement into the approved tree = the authorization; the agent did not self-promote.
+  `[V]`
+- **Note:** this repo has **no approval-guard hook** (unlike LiteController/
+  CameraConductor). Nothing mechanically enforces the approved tree here yet — flag if a
+  guard is wanted.
+
 ---
 
 ## Open items — do NOT build on these
