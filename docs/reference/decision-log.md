@@ -42,7 +42,7 @@ blueprints. Per decision-doctrine §8: status + why + provenance; per §10, noth
   its transport.
 - **Why:** Owner decisions across the brainstorm (modules-not-plugins; core-mediation "there is a
   reason it is the core"; async). Grounded in research
-  (`docs/_working/research/2026-07-15-core-module-boundary-research.md`). `[V]` (design); core
+  (`docs/research/2026-07-15-core-module-boundary-research.md`). `[V]` (design); core
   mediation is `[A]` until a running build (commentary V-2).
 
 ### D-004 — Three contracts, core-owned, in the core's vocabulary

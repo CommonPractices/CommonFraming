@@ -3,7 +3,7 @@
 **What this is.** The narrative record of how the `blueprints` repo and the
 `simple-hardware-controller-service` blueprint were designed — the reasoning, the forks, the
 owner's corrections, and the *why* behind each decision. The [spec](../../blueprints/simple-hardware-controller-service/spec.md)
-is the *what*; the [decision log](../_working/reference/decision-log.md) is the terse *what + status*;
+is the *what*; the [decision log](../reference/decision-log.md) is the terse *what + status*;
 **this doc is the *why and how-we-got-here*.** It exists so a future reader (or a future you)
 understands the *reasoning*, not just the outcome — because an unrecorded rationale gets re-derived,
 usually wrongly.
@@ -125,7 +125,7 @@ The owner directed: **flesh out the boundary properly; do research on best pract
 A thin-then-deep web sweep found the architecture is a **textbook instance of two independently-
 developed patterns that converge** — **Hexagonal / Ports & Adapters** (Cockburn) and the **IoT
 Gateway northbound/southbound** pattern. Convergence from unrelated traditions = strong evidence the
-shape is right. The research (see [the artifact](../_working/research/2026-07-15-core-module-boundary-research.md))
+shape is right. The research (see [the artifact](../research/2026-07-15-core-module-boundary-research.md))
 settled several rules:
 
 - **The core owns and DEFINES the contracts; modules/drivers depend on the core, never the reverse.**
