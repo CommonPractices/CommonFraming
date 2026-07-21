@@ -151,3 +151,30 @@ what changed in the spec.)*
   This is the blueprint's first demonstrated *external* value, and notably it is the part that survived the
   instance that rejected the mechanism around it — evidence the **vocabulary is the portable core** and the
   plumbing is the local choice.
+
+- **2026-07-20 — LiteController daemon build (the FIRST RUNNING build) confirms F-1: core-mediation is a
+  MECHANISM, not the invariant.** `[V]`-on-a-running-build (the first entry here that is). Surfaced by
+  building `litecontrollerd`'s single-flight core against this blueprint; recorded on branch
+  `from-litecontroller/f1-core-mediation-second-instance` and in LiteController's findings log
+  (`docs/_working/reference/cp-sw-findings-log.md`, F-001).
+
+  The build satisfies the **property** §3 exists to guarantee — *the core observes every delivery outcome
+  and connection event* — **without** the §3 *mechanism* (a pluggable async transport module the core drives
+  while the driver holds no connection). LiteController's `Core::submit()` drives an async `Southbound` seam
+  and reads its **returned `Outcome`**; observation is the return value, and a returned value cannot be
+  dropped on the floor (the same strength argument DeckLibre's sync-return made in F-1). Single-flight
+  ordering falls out of the one shared-seq lock all southbound access funnels through — the §7 property,
+  again from the chokepoint, not from the specific mechanism.
+
+  This is now **two independent instances** (DeckLibre reviewed, LiteController built) satisfying the
+  property by a different mechanism than §3 prescribes. Per CHARTER §5, two is the threshold at which a
+  pattern is real: the recommendation from F-1 — **demote §3's core-mediation-via-transport-module to *one
+  mechanism that satisfies the property*, and re-scope the §10 conformance checklist to test the property
+  ("the core observes every delivery outcome and connection event"), not the mechanism ("the driver never
+  touches a transport")** — is now backed by a running build, not just a review. **V-2 is thereby answered
+  for the property and re-scoped for the mechanism.** The actual spec edit is the owner's to make.
+
+  *(Contract-honesty note per the LiteController build's stop-and-resolve discipline: the async-fn-in-trait
+  made the `Southbound` seam not `dyn`-compatible, so `Core::submit` takes the transport as a generic
+  `T: Southbound` rather than `&dyn`. Minor realization detail, not a blueprint concern — the seam is still
+  one behavioural contract; noted only so the shape is honest.)*
