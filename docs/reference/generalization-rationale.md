@@ -78,11 +78,11 @@ WS-specific. So WS is *one northbound adapter*, and the protocol-agnostic princi
 Three options were weighed: (A) pure index, (B) index + a thin charter defining a blueprint's
 required *anatomy*, (C) charter + shared cross-blueprint conventions. **B was chosen.** A pure index
 (A) enforces nothing, so blueprint #2 resembles #1 only by luck — failing the "all look/feel the
-same" goal. (C) over-reaches: asserting "all blueprints compose design-doctrine / are
+same" goal. (C) over-reaches: asserting "all blueprints compose CommonMind / are
 language-agnostic" is a guess about blueprints not yet met. **B** defines only the *container*
 (anatomy + folder convention + compose-don't-duplicate) and stays silent on future blueprints'
 domains — consistency without over-claim. The charter lives **in the repo** (self-describing), not in
-design-doctrine.
+CommonMind.
 
 ### 2.7 "Plugins" vs. "modules", and the loading mechanism → compile-time, in-tree modules
 The big architectural fork. The owner initially reached for **plugins** in the OBS/nginx/Audacity
@@ -217,7 +217,7 @@ which claims are proven vs. assumed, and the light-meter build is what will conf
 ## 6. Doctrine produced along the way
 
 "Generalize this whole effort" also surfaced several **portable rules** that were promoted to the
-design-doctrine family (not kept inside this blueprint, per compose-don't-duplicate):
+CommonMind family (not kept inside this blueprint, per compose-don't-duplicate):
 
 - **WebSocket Control Doctrine** — generalized from CameraConductor's control server; the northbound
   interaction principles behind Contract B.

@@ -8,11 +8,11 @@ default, absent until deliberately enabled**, reached off-box only through two d
 
 The shape is deliberately generic: a service, a renderer, a plugin — any family product can carry
 one. It is a **separate, discoverable surface** (not a privileged mode on the control channel),
-and it **supersets** the [WebSocket Control](../../../design-doctrine/ws-control-doctrine.md)
+and it **supersets** the [WebSocket Control](../../../CommonMind/ws-control-doctrine.md)
 contract rather than reinventing it.
 
 **Status:** DRAFT — first extraction. The principle is the
-[Debugging Doctrine](../../../design-doctrine/debugging-doctrine.md); this blueprint is the
+[Debugging Doctrine](../../../CommonMind/debugging-doctrine.md); this blueprint is the
 *shape*. Every claim is a hypothesis (`[A]`) until proven on a real build — **LiteController**
 (`litecontrollerd`) is the intended first proving instance, and its needs are why this exists.
 
@@ -20,6 +20,6 @@ contract rather than reinventing it.
   and the conformance checklist.
 - **[`commentary.md`](commentary.md)** — the living validation logbook (`[V]`/`[D]`/`[A]`).
 
-This blueprint **composes** the design-doctrine family (it cites the doctrines a conformant
+This blueprint **composes** the CommonMind family (it cites the doctrines a conformant
 product must follow and adds only what is specific to the shape); it restates none of them. See
 the [Blueprint Charter](../../CHARTER.md).

@@ -15,7 +15,7 @@ engine work, so the shape is expected to be exercised and corrected soon.
 
 `[D]` This blueprint was **not** extracted from a running debug channel. It was derived from a
 design conversation (2026-07-20) grounded in the family doctrines and in Android's `adb` model as
-prior art. The [Debugging Doctrine](../../../design-doctrine/debugging-doctrine.md) (the principle)
+prior art. The [Debugging Doctrine](../../../CommonMind/debugging-doctrine.md) (the principle)
 and this blueprint (the shape) were authored together; neither has a built instance yet. That
 makes the whole spec a hypothesis pending LiteController.
 

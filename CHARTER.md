@@ -31,7 +31,7 @@ one stack.
 - **Not a library or framework.** It ships no code you depend on. It describes the shape so anyone
   can build it, in any language.
 - **Not a stack mandate.** It never requires a language, runtime, or packaging.
-- **Not a restatement of doctrine.** See §4 — it *composes* the design-doctrine family, it does not
+- **Not a restatement of doctrine.** See §4 — it *composes* the CommonMind family, it does not
   copy it.
 
 ---
@@ -55,14 +55,14 @@ is recorded honestly — an untested blueprint claim is `[A]`, not fact.
 
 ## 4. A blueprint COMPOSES doctrine — it does not duplicate it
 
-The [design-doctrine](../design-doctrine/) family already states cross-project principles (how to
+The [CommonMind](../CommonMind/) family already states cross-project principles (how to
 keep the record trustworthy, how a service binds, how confidence is scored, how devices are modeled,
 and so on). A blueprint **references** the doctrines a conformant product must follow and adds **only
 what is specific to the shape.**
 
 Restating a doctrine inside a blueprint is a defect: it creates a second copy that drifts. If a
 blueprint needs a rule that turns out to be portable beyond the shape, that rule belongs in
-design-doctrine (and the blueprint cites it), not inline.
+CommonMind (and the blueprint cites it), not inline.
 
 ---
 
@@ -74,7 +74,7 @@ service, or hardware-related, or anything in particular. The first blueprint hap
 controller service; the next may be an entirely different genre.
 
 This is deliberate, and it is the same discipline the [Device-Model
-Doctrine](../design-doctrine/device-model-doctrine.md) applies to hardware: **do not over-abstract
+Doctrine](../CommonMind/device-model-doctrine.md) applies to hardware: **do not over-abstract
 from one instance.** With one blueprint in hand, any "all blueprints are X" rule would be a guess.
 The charter therefore constrains only the shape of the folder, not the nature of what fills it. When
 a second, different blueprint exists and a genuine cross-blueprint pattern emerges, *then* it can be

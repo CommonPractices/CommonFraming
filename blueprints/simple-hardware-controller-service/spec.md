@@ -175,7 +175,7 @@ core rule.) The confidence enum:
 - `unknown` — never commanded this session, or delivery could not be confirmed.
 - `stale` — we had a value, but a disconnect / suspected power-cycle invalidated confidence.
 
-This is the [Confidence & Provenance Scoring Doctrine](../../../design-doctrine/confidence-scoring-doctrine.md)
+This is the [Confidence & Provenance Scoring Doctrine](../../../CommonMind/confidence-scoring-doctrine.md)
 applied to **live runtime state**: a value dressed as more certain than it is, is a lie the service
 tells its surfaces. Write-only hardware is the exception that proves the rule (`commanded`, never
 `confirmed`); readable hardware gets `confirmed` for free. The same enum serves both — which is the
@@ -202,10 +202,10 @@ identity()              -> Hello           # app-identity handshake; a surface c
   This is *especially* valuable to a REST product, which would otherwise read a `200` as "the
   hardware obeyed."
 - **The module owns protocol mechanics only** — framing, serialization (strict JSON per the [Data
-  Format Doctrine](../../../design-doctrine/data-format-doctrine.md)), bind/port/auth *mechanics*,
+  Format Doctrine](../../../CommonMind/data-format-doctrine.md)), bind/port/auth *mechanics*,
   multi-client fan-out, keepalive. It never interprets the model it carries.
 - **Adapter mapping (illustrative):** WebSocket → `hello`/`state`/`delta` text frames + an intent
-  message ([WebSocket Control Doctrine](../../../design-doctrine/ws-control-doctrine.md) is the
+  message ([WebSocket Control Doctrine](../../../CommonMind/ws-control-doctrine.md) is the
   worked adapter). REST → `GET /state`, SSE or long-poll for the stream, `POST` an intent. gRPC →
   server-streaming state, unary intents.
 
@@ -257,9 +257,9 @@ These live in the core and are the same for every product of the shape — the r
   (per-command → per-device → global default), reconnect re-assertion. The *engine* is core; the
   device-specific *hints* come from the driver (§8). `[V]`
 - **Config / lifecycle / platform integration** — per the [Service Foundations
-  Doctrine](../../../design-doctrine/service-foundations-doctrine.md) (one config-resolution chain,
+  Doctrine](../../../CommonMind/service-foundations-doctrine.md) (one config-resolution chain,
   settable bind/port, loud bind failure, graceful shutdown that flushes unrecoverable state, refuse a
-  second instance) and the [Conventions Doctrine](../../../design-doctrine/conventions-doctrine.md)
+  second instance) and the [Conventions Doctrine](../../../CommonMind/conventions-doctrine.md)
   (platform-standard file locations, launch idioms).
 - **Asymmetric failure handling** `[D]` — a **southbound** failure degrades *device* confidence
   (physical consequence); a **northbound** failure is *client-facing only* and never touches device
@@ -281,9 +281,9 @@ required_transport()    -> TransportReq     # what this hardware needs to connec
 
 The driver is a **pure translator** — it holds no connection and races nothing; the core mediates its
 bytes to a transport (§3). Device descriptors it produces follow the [Device-Model
-Doctrine](../../../design-doctrine/device-model-doctrine.md) (single-inheritance manufacturer →
+Doctrine](../../../CommonMind/device-model-doctrine.md) (single-inheritance manufacturer →
 family → device; the **wire protocol rides the chain at its truthful tier**) and the [SMT
-Doctrine](../../../design-doctrine/smt-doctrine.md) (relabels = one definition + an open identity
+Doctrine](../../../CommonMind/smt-doctrine.md) (relabels = one definition + an open identity
 array, sameness earned; a name kept across a behavioural break is marked and its confidence capped).
 
 ---
@@ -295,15 +295,15 @@ A conformant product follows these — the blueprint **cites** them and adds onl
 
 | Doctrine | What it governs for this shape |
 |---|---|
-| [WebSocket Control](../../../design-doctrine/ws-control-doctrine.md) | One northbound adapter + the protocol-agnostic interaction principles behind Contract B. |
-| [Service Foundations](../../../design-doctrine/service-foundations-doctrine.md) | Config resolution, bind/port, loud bind failure, graceful shutdown + durable-state flush, single-instance, headless-clean, logging, auto-start. |
-| [Conventions](../../../design-doctrine/conventions-doctrine.md) | Platform-standard file locations, launch idioms, native integration. |
-| [Data Format](../../../design-doctrine/data-format-doctrine.md) | Strict JSON for our interchange + config/data; markers as fields. |
-| [Confidence & Provenance Scoring](../../../design-doctrine/confidence-scoring-doctrine.md) | The confidence model (§4), applied to live runtime state. |
-| [Device-Model](../../../design-doctrine/device-model-doctrine.md) | Driver descriptors: inheritance chain; protocol rides it at its truthful tier. |
-| [SMT](../../../design-doctrine/smt-doctrine.md) | Relabels (Face A) and name-kept-across-a-break (Face B) in descriptors + relabel-robust recognition. |
-| [Forward-Compatible Format](../../../design-doctrine/forward-compatible-format-doctrine.md) | Versioning the contracts and on-disk formats so they evolve without breaking. |
-| [Artifact Persistence](../../../design-doctrine/artifact-persistence-doctrine.md) | Load-bearing research/derivations become dated files, cited bidirectionally. |
+| [WebSocket Control](../../../CommonMind/ws-control-doctrine.md) | One northbound adapter + the protocol-agnostic interaction principles behind Contract B. |
+| [Service Foundations](../../../CommonMind/service-foundations-doctrine.md) | Config resolution, bind/port, loud bind failure, graceful shutdown + durable-state flush, single-instance, headless-clean, logging, auto-start. |
+| [Conventions](../../../CommonMind/conventions-doctrine.md) | Platform-standard file locations, launch idioms, native integration. |
+| [Data Format](../../../CommonMind/data-format-doctrine.md) | Strict JSON for our interchange + config/data; markers as fields. |
+| [Confidence & Provenance Scoring](../../../CommonMind/confidence-scoring-doctrine.md) | The confidence model (§4), applied to live runtime state. |
+| [Device-Model](../../../CommonMind/device-model-doctrine.md) | Driver descriptors: inheritance chain; protocol rides it at its truthful tier. |
+| [SMT](../../../CommonMind/smt-doctrine.md) | Relabels (Face A) and name-kept-across-a-break (Face B) in descriptors + relabel-robust recognition. |
+| [Forward-Compatible Format](../../../CommonMind/forward-compatible-format-doctrine.md) | Versioning the contracts and on-disk formats so they evolve without breaking. |
+| [Artifact Persistence](../../../CommonMind/artifact-persistence-doctrine.md) | Load-bearing research/derivations become dated files, cited bidirectionally. |
 
 ---
 

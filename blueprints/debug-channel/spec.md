@@ -5,7 +5,7 @@ message-shape descriptions here; any concrete code is a labeled reference realiz
 normative statement (Charter §1).
 
 **This blueprint is the SHAPE. The PRINCIPLE is the
-[Debugging Doctrine](../../../design-doctrine/debugging-doctrine.md)** — it owns *what the
+[Debugging Doctrine](../../../CommonMind/debugging-doctrine.md)** — it owns *what the
 capability owes and how it is postured* (root; off-by-default; two dependent gates; the secret
 carve-out). This spec owns *how you build one* and does not restate the doctrine's rules; it
 cites them.
@@ -20,7 +20,7 @@ product can do — the tool of last resort when the ordinary interface cannot ex
 
 It is **not** a privileged mode bolted onto the control channel. It is its own surface (its own
 listener, its own credential, its own discovery), which is precisely what keeps it from being the
-"privileged back channel" [WS-Control §0](../../../design-doctrine/ws-control-doctrine.md)
+"privileged back channel" [WS-Control §0](../../../CommonMind/ws-control-doctrine.md)
 forbids: it is **explicit and advertised**, like `sudo` alongside a user account, not concealed
 (Debugging Doctrine §2).
 
@@ -56,7 +56,7 @@ normal client should do.
 
 ## 3. Security posture (cited, not restated)
 
-The posture is owned by [Debugging Doctrine §3](../../../design-doctrine/debugging-doctrine.md).
+The posture is owned by [Debugging Doctrine §3](../../../CommonMind/debugging-doctrine.md).
 The shape must implement it exactly:
 
 - **Off by default; absent until enabled.** No listener, no advert, until Gate 1 is set.
@@ -78,26 +78,26 @@ The shape must implement it exactly:
 
 - **Transport:** a WebSocket surface (same family idiom as ws-control), on an **ephemeral port**
   (OS-assigned, IANA 49152–65535 per
-  [network-allocation](../../../design-doctrine/network-allocation-doctrine.md) §1.3) — a debug
+  [network-allocation](../../../CommonMind/network-allocation-doctrine.md) §1.3) — a debug
   surface is transient and need not hold a fixed port.
 - **Discovery:** advertised over **mDNS as `<product-slug>-debug`**
-  ([network-allocation §2](../../../design-doctrine/network-allocation-doctrine.md)), **only
+  ([network-allocation §2](../../../CommonMind/network-allocation-doctrine.md)), **only
   while enabled** (absent from discovery when off).
 - **Both gates advertise.** Gate 1 (local) advertises loopback-scoped; Gate 2 (network)
   advertises on the reachable interface. *This is a deliberate deviation from the adb de-facto
   convention (which advertises wireless only, not USB), chosen for discoverability / ease of use;
   recorded as a conscious deviation per
-  [conventions-doctrine](../../../design-doctrine/conventions-doctrine.md) — see
+  [conventions-doctrine](../../../CommonMind/conventions-doctrine.md) — see
   [commentary](commentary.md).*
 
 ## 5. The contract — a superset of ws-control
 
-The debug surface **inherits the entire [WS-Control](../../../design-doctrine/ws-control-doctrine.md)
+The debug surface **inherits the entire [WS-Control](../../../CommonMind/ws-control-doctrine.md)
 contract** and adds three verb families. It does not reinvent the message shape.
 
 **Inherited, unchanged:**
 - `hello → state → delta`; a client builds its model from `state`, keeps it current with `delta`.
-- **Fire-and-forget intents** and **confirm-by-observation** ([WS-Control §2](../../../design-doctrine/ws-control-doctrine.md))
+- **Fire-and-forget intents** and **confirm-by-observation** ([WS-Control §2](../../../CommonMind/ws-control-doctrine.md))
   — the ack is the resulting `delta`, never a trusted send. Root does not exempt debug from this
   truth about real hardware.
 
@@ -110,7 +110,7 @@ undifferentiated firehose:
 |--------|-----------------|
 | **internal state** | what the control channel hides: queue depth, retry counters, the raw confidence source, mode-gate reasons, connection internals, caches. |
 | **wire frames** | live tap of the southbound transport — raw BLE-mesh frames, PTP chatter, per-byte codec steps (the `trace` firehose, on demand). |
-| **log firehose** | the complete log stream at any level incl. `trace`, backlog-on-connect then live (the [logging §1](../../../design-doctrine/logging-diagnostics-doctrine.md) published stream, root-privileged). |
+| **log firehose** | the complete log stream at any level incl. `trace`, backlog-on-connect then live (the [logging §1](../../../CommonMind/logging-diagnostics-doctrine.md) published stream, root-privileged). |
 | **introspection** | interactive read queries against the running product — dump a structure, evaluate a state expression, list active sessions (an `adb shell`-like read surface). |
 
 Subscribe / unsubscribe / set-filter are the verbs; every stream obeys the **§4 redaction floor**
@@ -132,7 +132,7 @@ These are loaded guns; they are root-only by construction and never mirror a fro
 
 **Added family C — Reveal (the one secret carve-out).** A **per-secret, explicit, audited**
 request to unveil a real secret value, owned as a principle by
-[Debugging Doctrine §4](../../../design-doctrine/debugging-doctrine.md) (reveal-not-enable applied
+[Debugging Doctrine §4](../../../CommonMind/debugging-doctrine.md) (reveal-not-enable applied
 to secrets). Default is redacted; the reveal is a conscious request for *one* value and is itself
 logged. The passively-observed session still sees `***`.
 
@@ -140,13 +140,13 @@ logged. The passively-observed session still sees `***`.
 
 | Doctrine | What it governs here |
 |----------|----------------------|
-| [Debugging Doctrine](../../../design-doctrine/debugging-doctrine.md) | the principle: root, posture, gates, the secret carve-out. **This blueprint is its shape.** |
-| [WS-Control](../../../design-doctrine/ws-control-doctrine.md) | §0 (explicit ≠ back channel), the inherited contract, confirm-by-observation. |
-| [Logging & Diagnostics](../../../design-doctrine/logging-diagnostics-doctrine.md) | the log stream (§1) debug reads; the §4 redaction floor binding every observe stream. |
-| [Secrets & Credentials](../../../design-doctrine/secrets-credentials-doctrine.md) | the debug credential's handling; the value a reveal unveils. |
-| [Decision Doctrine](../../../design-doctrine/decision-doctrine.md) | §4–§5 safe/survivable default; reveal-not-enable (secret reveal; the two gates). |
-| [Service Foundations](../../../design-doctrine/service-foundations-doctrine.md) | the config chain that resolves the gates/credential/allowlist; bind-loud-and-fatal. |
-| [Network Allocation](../../../design-doctrine/network-allocation-doctrine.md) | the ephemeral-port + `<slug>-debug` mDNS attach mechanic. |
+| [Debugging Doctrine](../../../CommonMind/debugging-doctrine.md) | the principle: root, posture, gates, the secret carve-out. **This blueprint is its shape.** |
+| [WS-Control](../../../CommonMind/ws-control-doctrine.md) | §0 (explicit ≠ back channel), the inherited contract, confirm-by-observation. |
+| [Logging & Diagnostics](../../../CommonMind/logging-diagnostics-doctrine.md) | the log stream (§1) debug reads; the §4 redaction floor binding every observe stream. |
+| [Secrets & Credentials](../../../CommonMind/secrets-credentials-doctrine.md) | the debug credential's handling; the value a reveal unveils. |
+| [Decision Doctrine](../../../CommonMind/decision-doctrine.md) | §4–§5 safe/survivable default; reveal-not-enable (secret reveal; the two gates). |
+| [Service Foundations](../../../CommonMind/service-foundations-doctrine.md) | the config chain that resolves the gates/credential/allowlist; bind-loud-and-fatal. |
+| [Network Allocation](../../../CommonMind/network-allocation-doctrine.md) | the ephemeral-port + `<slug>-debug` mDNS attach mechanic. |
 
 ## 7. Known adapters and the open seam
 
